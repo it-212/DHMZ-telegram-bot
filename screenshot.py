@@ -2,7 +2,7 @@ from selenium import webdriver
 import webbrowser #only to show a picture
 import time
 
-def get():
+def get(city_code):
     # options
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
@@ -14,7 +14,7 @@ def get():
     driver.set_window_size(1000, 850)
 
     #choose your city
-    driver.get('https://prognoza.hr/3dslika2_print_tp.php?Code=Zapresic') 
+    driver.get('https://prognoza.hr/3dslika2_print_tp.php?Code='+city_code) 
 
     driver.save_screenshot('screenshot.png')
 

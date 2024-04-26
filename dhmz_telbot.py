@@ -37,7 +37,7 @@ def main():
 	bot.add_handler(CommandHandler('start',  check(commands.start)))
 	bot.add_handler(CommandHandler('stop',   check(commands.stop)))
 	bot.add_handler(CommandHandler('list',   check(commands.list)))
-	bot.add_handler(CommandHandler('dhmz',    check(commands.dhmz)))#, pass_args=True))
+	bot.add_handler(CommandHandler('dhmz',    check(commands.dhmz)))
 
 	bot.run_polling()
 
