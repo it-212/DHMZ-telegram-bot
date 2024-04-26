@@ -1,23 +1,14 @@
-from   os.path import exists as file_exists
 from   telegram.ext import *
 from   telegram import Update
 
 import commands
+import file_utils
 
 periodic_scan_time = 60
 
-def read_all_lines(file_name : str) -> list:
-	#procitaj sve jedinstvene linije u fileu
-	path = 'data/' + file_name
-	if file_exists(path):
-		with open(path, 'r') as file:
-			data = file.read()
-			return list(i for i in filter(lambda x: x != '', data.split('\n')))
-	return list()
-
-periodic_chats   = set(int(i) for i in read_all_lines('periodic_chats'))
-authorized_chats = set(int(i) for i in read_all_lines('authorized_chats'))
-stranice         = read_all_lines('city_codes')
+periodic_chats   = file_utils.get_content('periodic_chats')
+authorized_chats = file_utils.get_content('authorized_chats')
+stranice         = file_utils.read_all_lines('city_codes')
 
 def check(commandFunc):
 	#provjeri je li chat ovlasten za komunikaciju s botom
@@ -31,8 +22,9 @@ def check(commandFunc):
 		await commandFunc(update, context)
 	return check_chatid
 
-
 def main():
+	for line in authorized_chats:
+		print(line)
 
 	key = ''
 	with open('data/bot_token', 'r') as file:
